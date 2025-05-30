@@ -61,14 +61,5 @@ jobs:
       - name: Show PM2 process list
         run: npx pm2 list
 
-      - name: Save app logs
-        run: npx pm2 logs my-app --lines 100 > pm2-log.txt
-
-      - name: Upload PM2 logs
-        uses: actions/upload-artifact@v4
-        with:
-          name: pm2-log
-          path: pm2-log.txt
-          
       - name: Stop app after deployment check
         run: npx pm2 delete my-app || echo "App not running"
