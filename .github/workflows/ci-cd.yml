@@ -46,23 +46,23 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Install PM2 globally
-        run: npm install -g pm2
+      - name: Install PM2 locally
+        run: npm install pm2
 
       - name: Stop existing app (if running)
-        run: pm2 delete my-app || echo "App not running"
+        run: npx pm2 delete my-app || echo "App not running"
 
       - name: Start app with PM2
-        run: pm2 start src/server.js --name my-app
+        run: npx pm2 start src/server.js --name my-app
 
       - name: Check if app is running
         run: curl -sSf http://localhost:3000 || (echo "App failed to start" && exit 1)
 
       - name: Show PM2 process list
-        run: pm2 list
+        run: npx pm2 list
 
       - name: Save app logs
-        run: pm2 logs my-app --lines 100 > pm2-log.txt
+        run: npx pm2 logs my-app --lines 100 > pm2-log.txt
 
       - name: Upload PM2 logs
         uses: actions/upload-artifact@v4
