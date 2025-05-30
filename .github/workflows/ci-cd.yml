@@ -69,3 +69,6 @@ jobs:
         with:
           name: pm2-log
           path: pm2-log.txt
+          
+      - name: Stop app after deployment check
+        run: npx pm2 delete my-app || echo "App not running"
